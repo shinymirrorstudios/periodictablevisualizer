@@ -1,0 +1,51 @@
+<head>
+  <title>Periodic Table Visualizer</title>
+</head>
+
+<body>
+
+<div class="container">
+  {{> elem_viz}}
+</div>	
+</body>
+
+<template name="elem_viz">
+<div class="row">
+	<div class="col-md-6">
+			{{> elem_viz_controls}}
+			{{> elem_feature_list}}
+	</div>
+	<div class="col-md-6">
+			{{> elem_vizjs}}
+	</div>
+</div>
+
+</template>
+
+<template name="elem_viz_controls">
+	<form>
+		<!-- list of available single features -->
+		Periodic table numeric properties:
+		<br/>
+		<select class="js-select-single-feature">
+			{{#each get_feature_names "single"}}
+			<option value="{{name}}">{{name}}</option>
+			{{/each}}
+		</select>
+		<button class="btn js-show-blobs">blobs</button>
+		<button class="btn js-show-timeline">timeline</button>
+	</form>
+</template>	
+
+
+<template name="elem_feature_list">
+	<ul>
+	{{#each get_all_feature_values}}
+		<li>{{Symbol}} - {{name}}</li>
+	{{/each}}
+	</ul>
+</template>
+
+<template name="elem_vizjs">
+	<div id="visjs"></div>
+</template>
