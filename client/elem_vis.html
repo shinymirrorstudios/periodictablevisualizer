@@ -1,0 +1,40 @@
+<template name="elem_vis">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+					{{> elem_vis_controls}}
+					{{> elem_feature_list}}
+			</div>
+			<div class="col-md-6">
+					{{> elem_visjs}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="elem_vis_controls">
+	<form>
+		<!-- list of available single features -->
+		Periodic table numeric properties:
+		<br/>
+		<select class="js-select-single-feature">
+			{{#each get_feature_names "single"}}
+			<option value="{{name}}">{{name}}</option>
+			{{/each}}
+		</select>
+		<button class="btn js-show-blobs">blobs for {{current_feature_name}}</button>
+	</form>
+</template>	
+
+
+<template name="elem_feature_list">
+	<ul>
+	{{#each get_all_feature_values}}
+		<li>{{Symbol}} - {{name}} - {{value}}</li>
+	{{/each}}
+	</ul>
+</template>
+
+<template name="elem_visjs">
+	<div id="visjs"></div>
+</template>

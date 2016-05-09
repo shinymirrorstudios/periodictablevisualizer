@@ -2,7 +2,6 @@
 // reads the JSON data files from the filesystem 
 // and inserts them into the database if needed
 
-if (Meteor.isServer){
 	Meteor.startup(function(){
 		if (!PeriodicTableElements.findOne()){
 		console.log("no elements yet... creating from filesystem");
@@ -34,4 +33,24 @@ if (Meteor.isServer){
 		console.log("Inserted "+inserted_elements+" new elements...");
 	}
 	})
-}
+
+	Meteor.publish("periodicTableElements", function(){
+		return PeriodicTableElements.find();
+	})
+	
+	Meteor.publish("visualizations", function(){
+		return Visualizations.find({
+			$or:[
+					{isPrivate:{$ne:true}}, 
+					{owner:this.userId}
+				] 
+		});
+	})
+	
+	Meteor.publish("editingUsers", function(){
+		return EditingUsers.find();
+	})
+	
+	Meteor.publish("comments", function(){
+		return Comments.find();
+	})
