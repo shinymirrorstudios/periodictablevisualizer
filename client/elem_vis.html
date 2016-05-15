@@ -18,11 +18,12 @@
 		Periodic table numeric properties:
 		<br/>
 		<select class="js-select-single-feature">
-			{{#each get_feature_names "single"}}
-			<option value="{{name}}">{{name}}</option>
+			{{#each feature in get_features}}
+			<option value="{{feature.name}}">{{feature.printName}}</option>
 			{{/each}}
 		</select>
-		<button class="btn js-show-blobs">blobs for {{current_feature_name}}</button>
+		{{showBlob}}
+		<!-- <button class="btn js-show-blobs">blobs for {{current_feature_printName}}</button> -->
 	</form>
 </template>	
 

@@ -24,4 +24,11 @@ Router.route('/visualizations/:_id', function () {
   this.render("visItem", {to:"main"});  
 });
 
+Session.set("featureList", [
+		{name:"AtomicWeight", printName: "Atomic Weight"},
+		{name:"MeltingPoint", printName: "Melting Point"},
+		{name:"BoilingPoint", printName: "Boiling Point"},
+		{name:"MolarHeatCapacity", printName: "Molar Heat Capacity"}
+]);
+Session.set("feature", {feature:Session.get("featureList")[0], type:"numeric"})
 

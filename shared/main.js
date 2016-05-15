@@ -27,6 +27,7 @@ Meteor.methods({
       return id;
     }
   }, 
+  
   // changing vis privacy settings
   updateVisPrivacy:function(vis){
     console.log("updateVisPrivacy method");
@@ -37,6 +38,7 @@ Meteor.methods({
       Visualizations.update({_id:vis._id}, realVis);
     }
   },
+  
 // adding editors to a visualization
   addEditingUser:function(visid){
     var vis, user, eusers;
