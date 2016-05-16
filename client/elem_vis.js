@@ -62,7 +62,7 @@ var visjsobj;
 // numbers
   Template.elem_property_list.helpers({
     "get_all_property_values":function(){
-		console.log("in get_all_property_values");
+		// console.log("in get_all_property_values");
 		var elems = PeriodicTableElements.find({});
 		var properties = new Array();
 		var ind = 0;
@@ -71,7 +71,7 @@ var visjsobj;
 		// describing the song and the value it has for this particular feature
 		var visid = Session.get("visid");
 		var realVis = Visualizations.findOne({_id:visid});
-		console.log("realVis.property = "+realVis.property);
+		// console.log("realVis.property = "+realVis.property);
 		elems.forEach(function(elem){
 		  //console.log(elem);
 			properties[ind] = {
@@ -107,10 +107,11 @@ Template.elem_vis_controls.events({
 		event.preventDefault();
 		var type_name = $(event.target).val();
 		var types = Session.get("typeList");
-		console.log("type");
-		console.log(type_name);
+		// console.log("type");
+		// console.log(type_name);
 //		Session.set("type", {type:{name: type_name, printName:type_printName}});
 		var vis = {_id:Session.get("visid"), type:type_name};
+        Meteor.call("addEditingUser", Session.get("visid"));
 		Meteor.call("updateVisType", vis);
 		initVis();
 	}, 
@@ -121,10 +122,11 @@ Template.elem_vis_controls.events({
 		event.preventDefault();
 		var property_name = $(event.target).val();
 		var properties = Session.get("propertyList");
-		console.log("property");
-		console.log(property_name);
+		// console.log("property");
+		// console.log(property_name);
 //		Session.set("property", {property:{name: property_name, printName:property_printName}, type:"numeric"});
 		var vis = {_id:Session.get("visid"), property:property_name};
+        Meteor.call("addEditingUser", Session.get("visid"));
 		Meteor.call("updateVisProperty", vis);
 		initVis();
 	}, 
@@ -136,13 +138,13 @@ Template.elem_vis_controls.events({
 
 // function that creates a new blobby visualization
 function initVis(){
-	console.log("Starting initVis");
+	// console.log("Starting initVis");
   // clear out the old visualization if needed
   if (visjsobj != undefined){
 	  try {
 		visjsobj.destroy();
 	  } catch (e) {
-		  console.log("Error trying to destroy visjsobj");
+		  // console.log("Error trying to destroy visjsobj");
 	  }
   }
   var visid = Session.get("visid");

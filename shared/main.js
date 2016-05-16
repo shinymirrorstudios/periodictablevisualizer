@@ -4,11 +4,11 @@
 Meteor.methods({
   // adding new comments
   addComment:function(comment){
-    console.log("addComment method running!");
+    //console.log("addComment method running!");
     if (this.userId){// we have a user
       comment.owner = this.userId;
 	  comment.username = Meteor.user().emails[0].address;
-	  console.log("address: ",comment.username);
+	  // console.log("address: ",comment.username);
 	  comment.createdOn = new Date();
         return Comments.insert(comment);
     }
@@ -17,7 +17,7 @@ Meteor.methods({
 
   // adding new visualizations
   addVis:function(){
-    console.log("calling addVis");
+    // console.log("calling addVis");
     var vis;
     if (!this.userId){// not logged in
       return;
@@ -29,14 +29,14 @@ Meteor.methods({
 			property:"AtomicWeight"
 	  }
 	  var id = Visualizations.insert(vis);
-      console.log("addVis method: got an id "+id);
+      // console.log("addVis method: got an id "+id);
       return id;
     }
   }, 
   
   // changing vis privacy settings
   updateVisPrivacy:function(vis){
-    console.log("updateVisPrivacy method");
+    // console.log("updateVisPrivacy method");
     var realVis = Visualizations.findOne({_id:vis._id, owner:this.userId});
     if (realVis){
       realVis.isPrivate = vis.isPrivate;
@@ -46,9 +46,9 @@ Meteor.methods({
   
   // changing vis type
   updateVisType:function(vis){
-    console.log("updateVisType method");
-    var realVis = Visualizations.findOne({_id:vis._id, owner:this.userId});
-    if (realVis){
+    // console.log("updateVisType method");
+    var realVis = Visualizations.findOne({_id:vis._id});
+    if (realVis && this.userId){
       realVis.type = vis.type;
       Visualizations.update({_id:vis._id}, realVis);
     }
@@ -56,11 +56,11 @@ Meteor.methods({
   
   // changing vis property
   updateVisProperty:function(vis){
-    console.log("updateVisProperty method");
-    var realVis = Visualizations.findOne({_id:vis._id, owner:this.userId});
-    if (realVis){
+    // console.log("updateVisProperty method");
+    var realVis = Visualizations.findOne({_id:vis._id});
+    if (realVis && this.userId){
       realVis.property = vis.property;
-	  console.log("realVis.property: "+realVis.property)
+	  // console.log("realVis.property: "+realVis.property)
       Visualizations.update({_id:vis._id}, realVis);
     }
   },
