@@ -1,19 +1,24 @@
 Template.visMeta.helpers({
-  // find current visualization
-  visualization:function(){
-    return Visualizations.findOne({_id:Session.get("visid")});
-  }, 
-  // test if a user is allowed to edit current vis
-  canEdit:function(){
-    var vis;
-    vis = Visualizations.findOne({_id:Session.get("visid")});
-    if (vis){
-      if (vis.owner == Meteor.userId()){
-        return true;
-      }
-    }
-    return false;
-  }
+	// find current visualization
+	visualization:function(){
+		return Visualizations.findOne({_id:Session.get("visid")});
+	}, 
+	// test if a user is allowed to edit current vis
+	canEdit:function(){
+		var vis;
+		vis = Visualizations.findOne({_id:Session.get("visid")});
+		if (vis){
+			if (vis.owner == Meteor.userId()){
+				return true;
+			}
+		}
+		return false;
+	},
+	checkIfPrivate : function() {
+		var visid = Session.get("visid");
+		var realVis = Visualizations.findOne({_id:visid});
+		return realVis.isPrivate ? "checked" : "";
+	},
 })
 
 /////////

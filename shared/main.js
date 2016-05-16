@@ -7,6 +7,9 @@ Meteor.methods({
     console.log("addComment method running!");
     if (this.userId){// we have a user
       comment.owner = this.userId;
+	  comment.username = Meteor.user().emails[0].address;
+	  console.log("address: ",comment.username);
+	  comment.createdOn = new Date();
         return Comments.insert(comment);
     }
     return;
@@ -21,8 +24,11 @@ Meteor.methods({
     }
     else {
       vis = {owner:this.userId, createdOn:new Date(), 
-            title:"my new visualization"};
-      var id = Visualizations.insert(vis);
+            title:"my new visualization", isPrivate:false,
+			type:"Blob",   
+			property:"AtomicWeight"
+	  }
+	  var id = Visualizations.insert(vis);
       console.log("addVis method: got an id "+id);
       return id;
     }
@@ -31,10 +37,30 @@ Meteor.methods({
   // changing vis privacy settings
   updateVisPrivacy:function(vis){
     console.log("updateVisPrivacy method");
-    console.log(vis);
     var realVis = Visualizations.findOne({_id:vis._id, owner:this.userId});
     if (realVis){
       realVis.isPrivate = vis.isPrivate;
+      Visualizations.update({_id:vis._id}, realVis);
+    }
+  },
+  
+  // changing vis type
+  updateVisType:function(vis){
+    console.log("updateVisType method");
+    var realVis = Visualizations.findOne({_id:vis._id, owner:this.userId});
+    if (realVis){
+      realVis.type = vis.type;
+      Visualizations.update({_id:vis._id}, realVis);
+    }
+  },
+  
+  // changing vis property
+  updateVisProperty:function(vis){
+    console.log("updateVisProperty method");
+    var realVis = Visualizations.findOne({_id:vis._id, owner:this.userId});
+    if (realVis){
+      realVis.property = vis.property;
+	  console.log("realVis.property: "+realVis.property)
       Visualizations.update({_id:vis._id}, realVis);
     }
   },

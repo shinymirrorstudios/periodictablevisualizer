@@ -1,9 +1,24 @@
 <template name="commentList">
-  {{#each comments}}
-  <ul>
-    <li>{{title}}
-      <p>{{body}}</p>
-    </li>
-  </ul>
-  {{/each}}
+	<div class="container">
+	{{#each comments}}
+	<div class="row commentHeader">
+		<div class="col-md-6">
+				{{username}}
+		</div>
+		<div class="col-md-6">
+				{{createdOn}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 commentTitle">
+				{{title}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+				{{body}}
+		</div>
+	</div>
+	{{/each}}
+	</div>
 </template>

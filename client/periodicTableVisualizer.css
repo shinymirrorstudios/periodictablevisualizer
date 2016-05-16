@@ -25,3 +25,12 @@
 .vis-label:hover{
 	fill-opacity:1;
 }
+
+.commentHeader{
+	border:1px solid gray;
+	background-color: silver;
+}
+
+.commentTitle{
+	font-weight:bold;
+}

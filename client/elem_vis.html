@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-6">
 					{{> elem_vis_controls}}
-					{{> elem_feature_list}}
+					{{> elem_property_list}}
 			</div>
 			<div class="col-md-6">
 					{{> elem_visjs}}
@@ -15,22 +15,28 @@
 <template name="elem_vis_controls">
 	<form>
 		<!-- list of available single features -->
-		Periodic table numeric properties:
+		Periodic table Visualizations:
 		<br/>
-		<select class="js-select-single-feature">
-			{{#each feature in get_features}}
-			<option value="{{feature.name}}">{{feature.printName}}</option>
+		Visualization Type:
+		<select class="js-select-type">
+			{{#each type in get_types}}
+			<option value="{{type.name}}" {{selectedIfTypeMatches type.name}}>{{type.printName}}</option>
 			{{/each}}
 		</select>
-		{{showBlob}}
-		<!-- <button class="btn js-show-blobs">blobs for {{current_feature_printName}}</button> -->
+		<br/>
+		Element Property:
+		<select class="js-select-single-property">
+			{{#each property in get_properties}}
+			<option value="{{property.name}}" {{selectedIfPropertyMatches property.name}}>{{property.printName}}</option>
+			{{/each}}
+		</select>
+		<!-- <button class="btn js-show-blobs">blobs for {{current_property_printName}}</button> -->
 	</form>
 </template>	
 
-
-<template name="elem_feature_list">
+<template name="elem_property_list">
 	<ul>
-	{{#each get_all_feature_values}}
+	{{#each get_all_property_values}}
 		<li>{{Symbol}} - {{name}} - {{value}}</li>
 	{{/each}}
 	</ul>
@@ -38,4 +44,5 @@
 
 <template name="elem_visjs">
 	<div id="visjs"></div>
+	{{ShowVis}}
 </template>

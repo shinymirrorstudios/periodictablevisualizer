@@ -15,6 +15,37 @@ Comments = new Mongo.Collection("comments");
 
 // set up a schema controlling the allowable 
 // structure of comment objects
+
+// this.Visualizations.attachSchema(new SimpleSchema({
+  // owner:{
+  	// type: String, 
+  // }, 
+  // createdOn:{
+  	// type: Date, 
+  // }, 
+  // isPrivate:{
+  	// type: Boolean, 
+  // }, 
+  // title: {
+    // type: String,
+    // label: "Title",
+    // max: 200
+  // },
+  // type:{
+    // type: String,
+    // label: "Type",
+    // max: 1000  	
+  // },
+  // property:{
+    // type: String,
+    // label: "Property",
+    // max: 1000  	
+  // },
+// }));
+
+
+// set up a schema controlling the allowable 
+// structure of comment objects
 Comments.attachSchema(new SimpleSchema({
   title: {
     type: String,
@@ -32,5 +63,10 @@ Comments.attachSchema(new SimpleSchema({
   owner:{
   	type: String, 
   }, 
-  
+  username:{
+  	type: String, 
+  }, 
+  createdOn:{
+  	type: Date, 
+  }, 
 }));

@@ -24,11 +24,17 @@ Router.route('/visualizations/:_id', function () {
   this.render("visItem", {to:"main"});  
 });
 
-Session.set("featureList", [
+Session.set("typeList", [
+		{name:"Blob", printName: "Blob"},
+		{name:"3DChart", printName: "3D Chart"},
+]);
+
+Session.set("propertyList", [
 		{name:"AtomicWeight", printName: "Atomic Weight"},
 		{name:"MeltingPoint", printName: "Melting Point"},
 		{name:"BoilingPoint", printName: "Boiling Point"},
 		{name:"MolarHeatCapacity", printName: "Molar Heat Capacity"}
 ]);
-Session.set("feature", {feature:Session.get("featureList")[0], type:"numeric"})
+Session.set("type", {type:Session.get("typeList")[0]});
+Session.set("property", {property:Session.get("propertyList")[0], type:"numeric"});
 
